@@ -51,3 +51,45 @@ Coverage for `src/VestingVault.sol`: 100.00% line coverage and 67.57% branch cov
   with the number of schedules held by that beneficiary.
 - The vault depends on the token contract allowing transfers. A token pause
   or address blocklist can prevent payouts.
+## Local Hardhat deployment and web interface
+
+Requires Node.js 22.13 or newer. Run from the project root.
+
+```powershell
+npm.cmd ci
+npm.cmd run chain
+```
+
+Leave the Hardhat terminal running. Open a second PowerShell terminal in the project root.
+
+```powershell
+npm.cmd run deploy:local
+npm.cmd run dev
+```
+
+Open [Vesting Vault](http://127.0.0.1:5173/). The deployment script deploys
+DemoToken and VestingVault, transfers 1500 DEMO to the vault, and writes
+the deployment addresses and ABIs for the interface. The interface uses
+the first Hardhat account and pre-fills the second account as beneficiary.
+
+Create a default schedule, advance 30 minutes, then revoke and release.
+The default schedule returns 500 DEMO to the owner and pays 500 DEMO to
+the beneficiary. The "Available now" amount then reads zero.
+
+Restarting the Hardhat node clears its state. Run the deployment again
+and reload the page after a restart. If Anvil or another local node is
+using port 8545, stop that process before starting Hardhat.
+
+### Hardhat tests
+
+Run the JavaScript integration tests with:
+
+```powershell
+npm.cmd test
+```
+
+Each test starts a fresh in-process Hardhat network. The 12 tests cover
+deployment and funding, schedule creation, cliff and duration boundaries,
+release and revocation, access controls, allocation limits, withdrawal of
+unallocated tokens, and transfers of schedule ownership. The Foundry suite
+is also available with `forge test`.

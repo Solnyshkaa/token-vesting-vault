@@ -1,0 +1,20 @@
+{
+  "name": "token-vesting-vault",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "chain": "hardhat node --hostname 127.0.0.1",
+    "deploy:local": "hardhat run scripts/deploy-local.js --network localhost",
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "build:web": "vite build",
+    "test": "hardhat build && node --test hardhat-test/vesting.test.js"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "5.0.2",
+    "ethers": "6.17.0",
+    "hardhat": "3.22.0",
+    "solc": "0.8.24",
+    "vite": "7.3.8"
+  }
+}

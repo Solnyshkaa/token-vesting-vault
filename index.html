@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Vesting Vault</title>
+</head>
+<body>
+<main>
+    <header>
+        <div><h1>Vesting Vault</h1><p>ERC-20 token schedules on your local Hardhat network.</p></div>
+        <span id="connection" class="network">Connecting</span>
+    </header>
+    <section class="balances" aria-label="Token balances">
+        <div><span>Vault balance</span><strong id="vault-balance">—</strong></div>
+        <div><span>Free to allocate</span><strong id="free-balance">—</strong></div>
+        <div><span>Beneficiary balance</span><strong id="beneficiary-balance">—</strong></div>
+    </section>
+    <p id="status" role="status">Loading deployment…</p>
+    <div class="panels">
+        <section class="panel">
+            <h2>Create a schedule</h2>
+            <label for="beneficiary">Beneficiary</label>
+            <form id="create">
+                <input id="beneficiary" name="beneficiary" required pattern="0x[0-9a-fA-F]{40}">
+                <label>Amount (DEMO)<input name="amount" type="number" min="1" step="1" value="1000" required></label>
+                <div class="fields">
+                    <label>Cliff (seconds)<input name="cliff" type="number" min="0" step="1" value="300" required></label>
+                    <label>Duration (seconds)<input name="duration" type="number" min="1" step="1" value="3600" required></label>
+                </div>
+                <label class="checkbox"><input type="checkbox" name="revocable" checked> Allow owner to revoke</label>
+                <button id="create-button" disabled>Create schedule</button>
+            </form>
+        </section>
+        <section class="panel">
+            <h2>Schedule details</h2>
+            <label>Schedule ID<select id="schedule" disabled><option value="">No schedules</option></select></label>
+            <p id="recipient" class="address">Create a schedule to see its recipient.</p>
+            <div class="progress" role="progressbar" aria-label="Vested share" aria-valuenow="0"><div id="progress-fill"></div></div>
+            <dl>
+                <div><dt>Allocation</dt><dd id="total">—</dd></div>
+                <div><dt>Vested</dt><dd id="vested">—</dd></div>
+                <div><dt>Released</dt><dd id="released">—</dd></div>
+                <div><dt>Available now</dt><dd id="releasable">—</dd></div>
+            </dl>
+            <p id="schedule-state"></p>
+            <div class="actions">
+                <button type="button" id="release" disabled>Release tokens</button>
+                <button type="button" id="revoke" class="secondary" disabled>Revoke schedule</button>
+            </div>
+        </section>
+    </div>
+    <section class="panel demo">
+        <div><h2>Local chain controls</h2><p>Advance the Hardhat block clock to demonstrate vesting.</p></div>
+        <div class="actions">
+            <button id="advance" class="secondary" disabled>Advance 30 minutes</button>
+            <button id="refresh" class="secondary" disabled>Refresh</button>
+        </div>
+    </section>
+    <footer id="deployment"></footer>
+</main>
+<script type="module" src="/web/main.js"></script>
+</body>
+</html>

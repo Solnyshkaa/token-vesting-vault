@@ -2,3 +2,8 @@ out/
 cache/
 broadcast/
 .env
+node_modules/
+artifacts/
+hardhat-cache/
+dist/
+public/deployment.json
