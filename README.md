@@ -2,6 +2,7 @@
 
 An ERC-20 vesting vault for teams that distribute tokens to employees, investors,
 and advisors on individual schedules.
+![Uploading image.png…]()
 
 ## Vesting example
 
